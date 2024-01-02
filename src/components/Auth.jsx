@@ -29,21 +29,8 @@ export const Auth = () => {
       await signOut(auth);
     } catch (error) {}
   };
-  useEffect(() => {
-    setEmail(auth?.currentUser?.email);
-    setPassword(auth?.currentUser?.password);
-  }, [auth]);
   return (
     <div>
-      <p>Logged in user email {email}</p>
-      <br />
-      <p>Logged in user password {password}</p>
-      <br />
-      <img
-        src={auth?.currentUser?.providerData[0]?.photoURL}
-        alt="user profile pic"
-      />
-      <br />
       <input
         placeholder="Enter email"
         value={email}
