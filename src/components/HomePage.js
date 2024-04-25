@@ -1,9 +1,12 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Box, Container, CssBaseline, Card, CardContent, Avatar, Grid } from '@mui/material';
+import { Box, Container, CssBaseline, Grid } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import GmailLogo from './gmail-logo.png'; // Adjust path as needed
+import YouTubeLogo from './youtube-logo.png'; // Adjust path as needed
+import ChromeLogo from './chrome-logo.png'; // Adjust path as needed
+import { Avatar } from '@mui/material';
 
 const theme = createTheme({
   palette: {
@@ -26,10 +29,14 @@ const theme = createTheme({
 });
 
 const HomePage = () => {
+  const openService = (url) => {
+    window.open(url, '_blank');
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container component="main" sx={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <Container component="main" sx={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
         <Box sx={{ mt: 4, mb: 2 }}>
           <Typography variant="h4" component="h1" gutterBottom>
             Welcome to Your Dashboard
@@ -48,25 +55,32 @@ const HomePage = () => {
             "Write tests to ensure your code works as expected and to prevent future issues."
           ].map((tip, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h6">Coding Tip #{index + 1}</Typography>
-                  <Typography variant="body2">
-                    {tip}
-                  </Typography>
-                </CardContent>
-              </Card>
+              <Typography variant="h6">Coding Tip #{index + 1}</Typography>
+              <Typography variant="body2">
+                {tip}
+              </Typography>
             </Grid>
           ))}
         </Grid>
-        <Box sx={{ mt: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <Avatar src={GmailLogo} sx={{ width: 56, height: 56, mt: 2, mb: 2 }} />
-          <Button variant="contained" color="primary" onClick={() => window.open('https://mail.google.com/', '_blank')} sx={{ mt: 3 }}>
-            Open Gmail
-          </Button>
-          <Typography variant="caption" sx={{ mt: 2 }}>
-            Quickly access your Gmail to manage your emails efficiently.
-          </Typography>
+        <Box sx={{ mt: 4, display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mr: 2 }}>
+            <Avatar src={GmailLogo} sx={{ width: 56, height: 56 }} />
+            <Button variant="contained" color="primary" onClick={() => openService('https://mail.google.com/')}>
+              Open Gmail
+            </Button>
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mr: 2 }}>
+            <Avatar src={YouTubeLogo} sx={{ width: 56, height: 56 }} />
+            <Button variant="contained" color="primary" onClick={() => openService('https://www.youtube.com/')}>
+              Open YouTube
+            </Button>
+          </Box>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Avatar src={ChromeLogo} sx={{ width: 56, height: 56 }} />
+            <Button variant="contained" color="primary" onClick={() => openService('https://www.google.com/chrome/')}>
+              Open Chrome
+            </Button>
+          </Box>
         </Box>
       </Container>
     </ThemeProvider>
